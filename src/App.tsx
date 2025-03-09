@@ -2,8 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Search } from './components/Search';
 import { getMovieList } from './api/movies';
-import {Movie} from   './interfaces/Movie';
+import { Movie } from   './interfaces/Movie';
 import { Loading } from './components/Loading';
+import { MovieCard } from './components/MovieCard';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -53,9 +54,7 @@ const App = () => {
               <ul>
                 {
                   movieList.map((movie) => (
-                    <li key={movie.id}>
-                      <p className="text-white">{movie.title}</p>
-                    </li>
+                    <MovieCard key={movie.id} movie={movie} />
                   ))
                 }
               </ul>
