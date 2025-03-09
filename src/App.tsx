@@ -1,9 +1,32 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search } from './components/Search';
+import { getMovieList } from './api/movies';
+import {Movie} from   './interfaces/Movie';
+import { Loading } from './components/Loading';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [movieList, setMovieList] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchMovies = async () => {
+    setIsLoading(true);
+    setErrorMessage(''); 
+    try{
+      const data = await getMovieList();
+      setMovieList(data.results);
+    } catch (error) {
+      setErrorMessage(error as string);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   return (
     <main>
@@ -13,9 +36,32 @@ const App = () => {
         <header>
           <img src="./hero.png" alt="Hero Banner" />
           <h1>Find <span className="text-gradient">Movies</span> You'll Enjoy Without the Hassle</h1>
+          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </header>
 
-        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <section className="all-movies">
+          <h2 className="mt-[40px]">All movies</h2>
+
+          {
+            isLoading ? 
+            (
+              <Loading />
+            ) : errorMessage ?
+            (
+              <p className="text-red-500">{errorMessage}</p>
+            ) : (
+              <ul>
+                {
+                  movieList.map((movie) => (
+                    <li key={movie.id}>
+                      <p className="text-white">{movie.title}</p>
+                    </li>
+                  ))
+                }
+              </ul>
+            )
+          }
+        </section>
       </div>
     </main>
   )
