@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Loading = () => {
+export const Loading: React.FC = () => {
   return (
     <div role="status">
       <svg
