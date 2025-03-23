@@ -1,54 +1,26 @@
-# React + TypeScript + Vite
+# Movies React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é uma aplicação web desenvolvida em React que interage com a API do [The Movie Database (TMDB)](https://www.themoviedb.org) para permitir que os usuários realizem buscas por filmes e visualizem os filmes mais populares. Foi o utilizado o serviço [Appwrite](https://appwrite.io/), um BaaS (Backend as a Service), para armazenar informações dos filmes mais buscados.
 
-Currently, two official plugins are available:
+## 📌 Objetivo do Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este projeto foi criado com o intuito de estudar e praticar os seguintes conceitos:
 
-## Expanding the ESLint configuration
+- Gerenciamento de estados no React
+- Interação de uma aplicação React com APIs externas
+- Utilização de um BaaS para armazenar dados de forma simples e eficiente
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Tecnologias Utilizadas
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- React.js - Biblioteca principal para a construção da interface do usuário
+- React Hooks (useState, useEffect) - Para gerenciamento de estados e efeitos colaterais
+- The Movie Database API (TMDB) - Fonte de dados dos filmes
+- Appwrite - Para armazenar os filmes mais buscados
+- Tailwind CSS - Para estilização da interface
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📡 Funcionalidades
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- ✔ Buscar filmes por nome
+- ✔ Listar os filmes mais populares
+- ✔ Armazenar os filmes mais buscados utilizando um BaaS
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
