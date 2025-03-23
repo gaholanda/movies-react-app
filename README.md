@@ -2,11 +2,17 @@
 
 Este projeto é uma aplicação web desenvolvida em React que interage com a API do [The Movie Database (TMDB)](https://www.themoviedb.org) para permitir que os usuários realizem buscas por filmes e visualizem os filmes mais populares. Foi o utilizado o serviço [Appwrite](https://appwrite.io/), um BaaS (Backend as a Service), para armazenar informações dos filmes mais buscados.
 
+Acesse em [Movies React App](https://movies-react-app-five.vercel.app/)
+
 #### English
 This project is a web application developed in React that interacts with The Movie Database (TMDB) API to allow users to search for movies and view the most popular ones. The Appwrite service, a BaaS (Backend as a Service), was used to store information about the most searched movies.
 
+Access in [Movies React App](https://movies-react-app-five.vercel.app/)
+
 #### Español
 Este proyecto es una aplicación web desarrollada en React que interactúa con la API de The Movie Database (TMDB) para permitir a los usuarios buscar películas y ver las más populares. Se utilizó el servicio Appwrite, un BaaS (Backend as a Service), para almacenar información sobre las películas más buscadas.
+
+Acceder en [Movies React App](https://movies-react-app-five.vercel.app/)
 
 ## 📌 Objetivo do Projeto
 
@@ -53,4 +59,3 @@ Este proyecto fue creado con el propósito de estudiar y practicar los siguiente
 - Buscar películas por su nombre
 - Listar laa películas más populares
 - Guardar la informacíon de las películas populares en un BaaS
-
