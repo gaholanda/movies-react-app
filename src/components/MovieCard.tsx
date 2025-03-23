@@ -1,6 +1,6 @@
 import React from 'react';
 import { Movie } from '../interfaces/Movie';
-import { IMAGE_BASE_URL } from '../constants/api_constants';
+import { POSTER_URL } from '../constants/api_constants';
 
 interface MovieCardProps {
   movie: Movie;
@@ -14,11 +14,9 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
     release_date, 
     original_language 
   } = movie;
-  const POSTER_SIZE = 'w500';
-  const POSTER_URL = `${IMAGE_BASE_URL}/${POSTER_SIZE}/${poster_path}`;
   return (
     <li className="movie-card">
-      <img src={poster_path ? POSTER_URL : '/no-movie.png' } alt={title} />
+      <img src={poster_path ? POSTER_URL(poster_path) : '/no-movie.png' } alt={title} />
       <div className="mt-4">
         <h3>{title}</h3>
 

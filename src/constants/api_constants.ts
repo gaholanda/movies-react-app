@@ -9,9 +9,11 @@ const API_OPTIONS = {
 };
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 
+const POSTER_URL = (poster_path: string, poster_size = 500) => `${IMAGE_BASE_URL}/w${poster_size}${poster_path}`;
+
 export {
   API_BASE_URL,
   API_OPTIONS,
   API_KEY,
-  IMAGE_BASE_URL,
+  POSTER_URL,
 }

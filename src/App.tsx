@@ -6,6 +6,7 @@ import { getMovieList } from './api/movies';
 import { Movie } from   './interfaces/Movie';
 import { Loading } from './components/Loading';
 import { MovieCard } from './components/MovieCard';
+import { updateSearchCount } from './appwrite';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,6 +21,9 @@ const App = () => {
     try{
       const data = await getMovieList(query);
       setMovieList(data.results);
+      if(query && data.results.length > 0) {
+        await updateSearchCount(query, data.results[0]);
+      }
     } catch (error) {
       setErrorMessage(error as string);
     } finally {
