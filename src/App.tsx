@@ -12,11 +12,11 @@ const App = () => {
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchMovies = async () => {
+  const fetchMovies = async (query = '') => {
     setIsLoading(true);
     setErrorMessage(''); 
     try{
-      const data = await getMovieList();
+      const data = await getMovieList(query);
       setMovieList(data.results);
     } catch (error) {
       setErrorMessage(error as string);
@@ -26,8 +26,8 @@ const App = () => {
   }
 
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    fetchMovies(searchTerm);
+  }, [searchTerm]);
 
   return (
     <main>
