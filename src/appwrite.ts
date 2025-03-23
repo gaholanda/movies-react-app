@@ -1,6 +1,7 @@
 import { Client, Databases, ID, Query } from "appwrite";
 import { POSTER_URL } from "./constants/api_constants";
 import { Movie } from "./interfaces/Movie";
+import { AppwriteDocument } from "./interfaces/Appwrite";
 
 const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID;
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
@@ -32,5 +33,18 @@ export const updateSearchCount = async (searchTerm: string, movie: Movie) => {
     }
   } catch (error) {
     console.error(error);
+  }
+}
+
+export const getTrendingMovies = async () => {
+  try{
+    const result = await database.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID,
+      [Query.limit(5), Query.orderDesc('count')]
+    );
+    return result.documents as AppwriteDocument[];
+  } catch (error) {
+    console.log(error);
   }
 }

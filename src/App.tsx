@@ -6,7 +6,9 @@ import { getMovieList } from './api/movies';
 import { Movie } from   './interfaces/Movie';
 import { Loading } from './components/Loading';
 import { MovieCard } from './components/MovieCard';
-import { updateSearchCount } from './appwrite';
+import { TrendingMovieCard } from './components/TrendingMovieCard';
+import { updateSearchCount, getTrendingMovies } from './appwrite';
+import { AppwriteDocument } from './interfaces/Appwrite';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,6 +16,7 @@ const App = () => {
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [trendingMovies, setTrendingMovies] = useState<AppwriteDocument[]>([]);
 
   const fetchMovies = async (query = '') => {
     setIsLoading(true);
@@ -31,6 +34,15 @@ const App = () => {
     }
   }
 
+  const fetchTrendingMovies = async () => {
+    try {
+      const movies = await getTrendingMovies();
+      setTrendingMovies(movies || []);
+    } catch (error) {
+      console.error(`Èrror fetching trending movies: ${error}`);
+    }
+  }
+
   useDebounce(() => {
     setDebouncedSearchTerm(searchTerm);
   }, 500, [searchTerm]);
@@ -38,6 +50,10 @@ const App = () => {
   useEffect(() => {
     fetchMovies(debouncedSearchTerm);
   }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+    fetchTrendingMovies();
+  }, []);
 
   return (
     <main>
@@ -50,8 +66,19 @@ const App = () => {
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </header>
 
+        <section className="trending">
+          <h2>Trending Movies</h2>
+          <ul>
+            {
+              trendingMovies.map((movie, index) => (
+                <TrendingMovieCard key={movie.$id} index={index} movie={movie} />
+              ))
+            }
+          </ul>
+        </section>
+
         <section className="all-movies">
-          <h2 className="mt-[40px]">All movies</h2>
+          <h2>All movies</h2>
 
           {
             isLoading ? 
