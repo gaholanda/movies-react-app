@@ -10,7 +10,7 @@ import { TrendingMovieCard } from './components/TrendingMovieCard';
 import { updateSearchCount, getTrendingMovies } from './appwrite';
 import { AppwriteDocument } from './interfaces/Appwrite';
 
-const App = () => {
+const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [movieList, setMovieList] = useState<Movie[]>([]);
